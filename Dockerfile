@@ -1,8 +1,9 @@
-FROM nginx
-COPY . /app
-WORKDIR /app
+FROM node:14
+WORKDIR /user/src/app
+COPY package*.json ./
 
 RUN npm install
+copy . .
 RUN npm run build-production
 
-RUN forever
+CMD [ "forever", "server.js"]
